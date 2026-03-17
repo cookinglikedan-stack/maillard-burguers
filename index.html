@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maillard Smash Burguers - Comida para Llevar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+            border: 4px solid #fff;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #e94560;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            color: #eaeaea;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        .menu-section {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #e94560;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #e94560, #ffd93d);
+            border-radius: 2px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            border-bottom: 1px solid #ecf0f1;
+            transition: all 0.3s ease;
+            gap: 20px;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background: rgba(233, 69, 96, 0.05);
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 10px;
+            transform: translateX(5px);
+        }
+
+        /* ESTILO PARA IMÁGENES DE PRODUCTOS */
+        .item-image {
+            width: 130px;
+            height: 130px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+            border: 3px solid #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover .item-image {
+            transform: scale(1.05);
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .item-desc {
+            color: #5a6c7d;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .item-price {
+            font-size: 1.6em;
+            color: #e94560;
+            font-weight: 800;
+            white-space: nowrap;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .social-section {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .social-title {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .facebook { background: #1877f2; }
+        .instagram { 
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+        }
+        .whatsapp { background: #25d366; }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #eaeaea;
+            font-size: 0.9em;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8em; }
+            .menu-section { padding: 25px; }
+            .menu-item { 
+                flex-direction: column; 
+                text-align: center;
+                gap: 15px;
+            }
+            .item-image { 
+                width: 200px; 
+                height: 200px; 
+            }
+            .item-price { 
+                margin-left: 0; 
+                margin-top: 10px; 
+                font-size: 1.8em;
+            }
+            .social-btn { padding: 12px 20px; font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🍔</div>
+            <h1>MAILLARD SMASH BURGUERS</h1>
+            <p class="tagline">Sabor casero, calidad premium</p>
+        </header>
+
+        <!-- SIDES -->
+        <section class="menu-section">
+            <h2 class="section-title">SIDES</h2>
+            
+            <div class="menu-item">
+                <img src="1000145158.jpg" alt="Papas Clásicas" class="item-image">
+                <div class="item-info">
+                    <div class="item-name">Papas Clásicas</div>
+                    <div class="item-desc">Papas crujientes por fuera y suaves por dentro, ligeramente saladas. El acompañamiento perfecto para tu smash burger.</div>
+                </div>
+                <div class="item-price">$90.00</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="1000145160.jpg" alt="Papas Maillard" class="item-image">
+                <div class="item-info">
+                    <div class="item-name">Papas Maillard</div>
+                    <div class="item-desc">Papas crujientes con aderezo búfalo picante, ranch cremoso y tocino crujiente. Una explosión de sabores.</div>
+                </div>
+                <div class="item-price">$125.00</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="1000145162.jpg" alt="Papas Bacon Jam" class="item-image">
+                <div class="item-info">
+                    <div class="item-name">Papas Bacon Jam</div>
+                    <div class="item-desc">Papas doradas cubiertas con mermelada de tocino dulce y ahumada, coronadas con dos rebanadas de queso americano fundido.</div>
+                </div>
+                <div class="item-price">$150.00</div>
+            </div>
+        </section>
+
+        <!-- LA PLANCHA -->
+        <section class="menu-section">
+            <h2 class="section-title">La Plancha</h2>
+
+            <div class="menu-item">
+                <img src="1000145161.jpg" alt="Hamburguesa Original" class="item-image">
+                <div class="item-info">
+                    <div class="item-name">Original</div>
+                    <div class="item-desc">Doble smash con costra perfecta, queso americano derretido, pepinillos crujientes y cebolla blanca caramelizada. La clásica que nunca falla.</div>
+                </div>
+                <div class="item-price">$120.00</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="1000145164.jpg" alt="Hamburguesa Bacon Jam" class="item-image">
+                <div class="item-info">
+                    <div class="item-name">Bacon Jam</div>
+                    <div class="item-desc">Carne smash doble, queso americano cremoso y nuestra exclusiva mermelada de tocino que convierte cada mordida en puro umami.</div>
+                </div>
+                <div class="item-price">$170.00</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="1000145159.jpg" alt="Hamburguesa Green Heat" class="item-image">
+                <div class="item-info">
+                    <div class="item-name">Green Heat</div>
+                    <div class="item-desc">Doble smash con costra perfecta, queso americano, pepinillos y nuestra salsa cremosa de jalapeño con el equilibrio ideal entre cremoso y picante.</div>
+                </div>
+                <div class="item-price">$150.00</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="1000145163.jpg" alt="Hamburguesa Triple" class="item-image">
+                <div class="item-info">
+                    <div class="item-name">Triple</div>
+                    <div class="item-desc">Para los que no se conforman. 270g de carne premium en tres láminas ultra delgadas para maximizar el sabor crujiente. Triple queso fundido y pan brioche tostado.</div>
+                </div>
+                <div class="item-price">$190.00</div>
+            </div>
+        </section>
+
+        <!-- BEBIDAS -->
+        <section class="menu-section">
+            <h2 class="section-title">Bebidas Frías</h2>
+
+            <div class="menu-item">
+                <div class="item-info" style="margin-left: 150px;">
+                    <div class="item-name">Malteada de Vainilla</div>
+                    <div class="item-desc">Fina selección de vainilla en vaina emulsionada con lácteos premium. La pureza del sabor clásico en su máxima expresión.</div>
+                </div>
+                <div class="item-price">$90.00</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-info" style="margin-left: 150px;">
+                    <div class="item-name">Coca Cola</div>
+                    <div class="item-desc">Fría, chispeante y con ese golpe de gas exacto que limpia el paladar entre cada mordida de carne y queso.</div>
+                </div>
+                <div class="item-price">$60.00</div>
+            </div>
+        </section>
+
+        <!-- REDES SOCIALES -->
+        <section class="social-section">
+            <h2 class="social-title">¡Haz tu pedido!</h2>
+            <div class="social-buttons">
+                <a href="https://www.facebook.com/share/1Amyty2NiJ/" class="social-btn facebook" target="_blank">
+                    <span>📘</span> Facebook
+                </a>
+                <a href="https://www.instagram.com/maillardsmash?igsh=bWxjbnA0NWRjdTF5" class="social-btn instagram" target="_blank">
+                    <span>📷</span> Instagram
+                </a>
+                <a href="https://wa.me/523312964550" class="social-btn whatsapp" target="_blank">
+                    <span>💬</span> WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Maillard Smash Burguers - Hecho con ❤️</p>
+        </footer>
+    </div>
+</body>
+</html>
